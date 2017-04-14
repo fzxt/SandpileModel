@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class Site {
     Point position;
     int currentState;
-    ArrayList<Point> neighbourPoints;
 
     public Site(Point position, int initialState) {
         this.position = position;
