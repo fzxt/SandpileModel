@@ -15,48 +15,42 @@ public class GridTest {
         Site middleSite = testGrid1.getSiteAtPoint(new Point(1, 1));
         // Topple with the middle site
         testGrid1.topple(middleSite);
-        Site[][] g1Results = testGrid1.getSites();
 
-        assertEquals(0, g1Results[0][0].getCurrentState());
-        assertEquals(1, g1Results[0][1].getCurrentState());
-        assertEquals(0, g1Results[0][2].getCurrentState());
 
-        assertEquals(1, g1Results[1][0].getCurrentState());
-        assertEquals(0, g1Results[1][1].getCurrentState());
-        assertEquals(1, g1Results[1][2].getCurrentState());
+        int[][] expected = {
+                {0, 1, 0},
+                {1, 0 ,1},
+                {0, 1, 0}
+        };
 
-        assertEquals(0, g1Results[2][0].getCurrentState());
-        assertEquals(1, g1Results[2][1].getCurrentState());
-        assertEquals(0, g1Results[2][2].getCurrentState());
+        Site[][] resultingSites = testGrid1.getSites();
+        assertSiteStates(expected, resultingSites);
     }
 
     @Test
     public void shouldToppleAtThresholdCorrectly() {
         Grid testGrid2 = MockGrids.getTestGrid2();
-        Site bottomSite = testGrid2.getSiteAtPoint(new Point(3, 1));
-        bottomSite.increment();
-        // This should recursively topple multiple times
-        testGrid2.toppleAtThreshold(bottomSite, 4);
-        Site[][] g2Results = testGrid2.getSites();
+        Site startingSite = testGrid2.getSiteAtPoint(new Point(2, 2));
+        startingSite.increment();
+        testGrid2.toppleAtThreshold(startingSite, 4);
 
-        assertEquals(2, g2Results[0][0].getCurrentState());
-        assertEquals(2, g2Results[0][1].getCurrentState());
-        assertEquals(1, g2Results[0][2].getCurrentState());
-        assertEquals(2, g2Results[0][3].getCurrentState());
+        int[][] expected = {
+                {1, 3, 1, 3, 3},
+                {3, 1, 2, 1, 1},
+                {2, 1, 0, 3, 3},
+                {3, 3, 2, 0, 2},
+                {0, 2, 3, 2, 2}
+        };
 
-        assertEquals(2, g2Results[1][0].getCurrentState());
-        assertEquals(2, g2Results[1][1].getCurrentState());
-        assertEquals(0, g2Results[1][2].getCurrentState());
-        assertEquals(1, g2Results[1][3].getCurrentState());
+        Site[][] resultingSites = testGrid2.getSites();
+        assertSiteStates(expected, resultingSites);
+    }
 
-        assertEquals(3, g2Results[2][0].getCurrentState());
-        assertEquals(2, g2Results[2][1].getCurrentState());
-        assertEquals(2, g2Results[2][2].getCurrentState());
-        assertEquals(1, g2Results[2][3].getCurrentState());
-
-        assertEquals(0, g2Results[3][0].getCurrentState());
-        assertEquals(3, g2Results[3][1].getCurrentState());
-        assertEquals(3, g2Results[3][2].getCurrentState());
-        assertEquals(2, g2Results[3][3].getCurrentState());
+    private void assertSiteStates(int[][] expectedStates, Site[][] sites) {
+        for (int i = 0; i < expectedStates.length; i++) {
+            for (int j = 0; j < expectedStates[i].length; j++) {
+                assertEquals(expectedStates[i][j], sites[i][j].getCurrentState());
+            }
+        }
     }
 }

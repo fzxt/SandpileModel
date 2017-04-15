@@ -25,33 +25,37 @@ public class MockGrids {
 
 
     /**
-     * [0, 3, 3, 0]
-     * [0, 3, 0, 3]
-     * [0, 3, 3, 3]
-     * [3, 3, 0, 0]
+     * This grid was obtained from How Nature Works (Written by Bak), Page 53
+     * So it's significant that any test that uses this grid passes.
+     *
+     * [1, 2, 0, 2, 3]
+     * [2, 3, 2, 3, 0]
+     * [1, 2, 3, 3, 2]
+     * [3, 1, 3, 2, 1]
+     * [0, 2, 2, 1, 2]
      */
     public static Grid getTestGrid2() {
-        // 4x4 Grid
-        Grid grid = new Grid(4);
+        // 5x5 Grid
+        Grid grid = new Grid(5);
 
-        Point[] targetPoints = {
-                new Point(0, 1),
-                new Point(0, 2),
-                new Point(1, 1),
-                new Point(1, 3),
-                new Point(2, 1),
-                new Point(2, 2),
-                new Point(2, 3),
-                new Point(3, 0),
-                new Point(3, 1),
+        int[][] values = {
+                {1, 2, 0, 2, 3},
+                {2, 3, 2, 3, 0},
+                {1, 2, 3, 3, 2},
+                {3, 1, 3, 2, 1},
+                {0, 2, 2, 1, 2}
         };
 
-        // Set all target points to have state 3
-        for (Point point : targetPoints) {
-            grid.getSiteAtPoint(point).setState(3);
+        for (int i = 0; i < values.length; i++) {
+            for (int j = 0; j < values[i].length; j++) {
+                grid.getSiteAtPoint(new Point(i, j)).setState(values[i][j]);
+            }
         }
+
 
         return grid;
     }
+
+
 
 }
