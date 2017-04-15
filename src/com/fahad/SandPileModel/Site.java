@@ -1,7 +1,5 @@
 package com.fahad.SandPileModel;
 
-import java.util.ArrayList;
-
 public class Site {
     Point position;
     int currentState;
@@ -11,7 +9,7 @@ public class Site {
         this.currentState = initialState;
     }
 
-    void increment() {
+    public void increment() {
         currentState++;
     }
 

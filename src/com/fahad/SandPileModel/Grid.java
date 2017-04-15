@@ -40,6 +40,7 @@ public class Grid {
     public void toppleAtThreshold(Site s, int threshold) {
         if (s.getCurrentState() >= threshold) {
             topple(s);
+            // Search in left, right, down, up for any other potential topples
             toppleAtThreshold(getSiteAtPoint(new Point((s.position.x-1+n)%n, s.position.y)), threshold);
             toppleAtThreshold(getSiteAtPoint(new Point((s.position.x+1)%n, s.position.y)), threshold);
             toppleAtThreshold(getSiteAtPoint(new Point(s.position.x, (s.position.y-1+n)%n)), threshold);
