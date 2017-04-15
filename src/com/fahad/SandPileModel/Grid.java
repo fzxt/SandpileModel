@@ -40,24 +40,24 @@ public class Grid {
     public void toppleAtThreshold(Site s, int threshold) {
         if (s.getCurrentState() >= threshold) {
             topple(s);
-            // Search in left, right, down, up for any other potential topples
-            toppleAtThreshold(getSiteAtPoint(new Point((s.position.x-1+n)%n, s.position.y)), threshold);
-            toppleAtThreshold(getSiteAtPoint(new Point((s.position.x+1)%n, s.position.y)), threshold);
-            toppleAtThreshold(getSiteAtPoint(new Point(s.position.x, (s.position.y-1+n)%n)), threshold);
-            toppleAtThreshold(getSiteAtPoint(new Point(s.position.x, (s.position.y+1)%n)), threshold);
+
+            for (Point neighbouringPoint : Utility.getValidNeighbourPoints(s, 0, n)) {
+                // If the neighboring point is actually on the grid, we recursively check if it toppled
+                toppleAtThreshold(getSiteAtPoint(neighbouringPoint), threshold);
+            }
         }
     }
 
     /**
      * This will topple according to the model presented in Abelian Sandpile Model
-     * @param site
+     * @param site      The site one is trying to topple
      */
     public void topple(Site site) {
-        sites[site.position.x][site.position.y].setState(site.currentState - 4);
-        sites[(site.position.x+1)%n][site.position.y].increment();
-        sites[(site.position.x-1+n)%n][site.position.y].increment();
-        sites[site.position.x][(site.position.y-1+n)%n].increment();
-        sites[site.position.x][(site.position.y+1)%n].increment();
+        site.setState(site.currentState - 4);
+
+        for (Point neighbouringPoint : Utility.getValidNeighbourPoints(site, 0, n)) {
+            getSiteAtPoint(neighbouringPoint).increment();
+        }
     }
 
     public Site getSiteAtPoint(Point point) {
