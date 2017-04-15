@@ -4,14 +4,14 @@ import com.fahad.SandPileModel.Grid;
 import com.fahad.SandPileModel.Point;
 import com.fahad.SandPileModel.Site;
 
-public class MockGrids {
+class MockGrids {
 
     /**
      * [0, 0, 0]
      * [0, 4, 0]
      * [0, 0, 0]
      */
-    public static Grid getTestGrid1() {
+    static Grid getTestGrid1() {
         // 3x3 Grid
         Grid grid = new Grid(3);
         Point midPoint = new Point(1, 1);
@@ -25,7 +25,7 @@ public class MockGrids {
 
 
     /**
-     * This grid was obtained from How Nature Works (Written by Bak), Page 53
+     * This grid was obtained from How Nature Works (Written by Per Bak), Page 53
      * So it's significant that any test that uses this grid passes.
      *
      * [1, 2, 0, 2, 3]
@@ -34,7 +34,7 @@ public class MockGrids {
      * [3, 1, 3, 2, 1]
      * [0, 2, 2, 1, 2]
      */
-    public static Grid getTestGrid2() {
+    static Grid getTestGrid2() {
         // 5x5 Grid
         Grid grid = new Grid(5);
 

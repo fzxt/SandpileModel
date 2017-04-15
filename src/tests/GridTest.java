@@ -9,14 +9,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GridTest {
 
+    Grid testGrid1 = MockGrids.getTestGrid1();
+    Grid testGrid2 = MockGrids.getTestGrid2();
+
     @Test
     public void shouldToppleCorrectly() {
-        // Create a 3x3 Grid
-        Grid testGrid1 = MockGrids.getTestGrid1();
-        Site middleSite = testGrid1.getSiteAtPoint(new Point(1, 1));
-        // Topple with the middle site
-        testGrid1.topple(middleSite);
-
+        setUpTestGrid1();
 
         int[][] expected = {
                 {0, 1, 0},
@@ -25,16 +23,12 @@ public class GridTest {
         };
 
         Site[][] resultingSites = testGrid1.getSites();
-        assertEquals(1, testGrid1.getNumAvalanches());
         assertSiteStates(expected, resultingSites);
     }
 
     @Test
     public void shouldToppleAtThresholdCorrectly() {
-        Grid testGrid2 = MockGrids.getTestGrid2();
-        Site startingSite = testGrid2.getSiteAtPoint(new Point(2, 2));
-        startingSite.increment();
-        testGrid2.toppleAtThreshold(startingSite, 4);
+        setUpTestGrid2();
 
         int[][] expected = {
                 {1, 3, 1, 3, 3},
@@ -45,8 +39,26 @@ public class GridTest {
         };
 
         Site[][] resultingSites = testGrid2.getSites();
-        assertEquals(9, testGrid2.getNumAvalanches());
         assertSiteStates(expected, resultingSites);
+    }
+
+    @Test
+    public void shouldReturnCorrectNumberOfAvalanches() {
+        setUpTestGrid1();
+        setUpTestGrid2();
+        assertEquals(1, testGrid1.getNumAvalanches());
+        assertEquals(9, testGrid2.getNumAvalanches());
+    }
+
+    private void setUpTestGrid1() {
+        Site middleSite = testGrid1.getSiteAtPoint(new Point(1, 1));
+        testGrid1.topple(middleSite);
+    }
+
+    private void setUpTestGrid2() {
+        Site startingSite = testGrid2.getSiteAtPoint(new Point(2, 2));
+        startingSite.increment();
+        testGrid2.toppleAtThreshold(startingSite, 4);
     }
 
     private void assertSiteStates(int[][] expectedStates, Site[][] sites) {
@@ -56,5 +68,4 @@ public class GridTest {
             }
         }
     }
-
 }
