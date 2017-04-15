@@ -1,15 +1,20 @@
 package com.fahad.SandPileModel;
 
+import java.util.Map;
+import java.util.TreeMap;
+
 public class Grid {
 
     private Site[][] sites;
     private int n;
     private int numAvalanches;
+    private Map<Integer, Integer> sizeCountMap;
 
     public Grid(int n) {
         assert n > 0;
         this.n = n;
         numAvalanches = 0;
+        sizeCountMap = new TreeMap<>();
         sites = new Site[n][n];
         initializeWithEmptySites();
     }
@@ -36,6 +41,13 @@ public class Grid {
 
     private void incrementAvalancheCount() {
         numAvalanches++;
+        for (int i = 0; i <= getNumAvalanches(); i++) {
+            if (sizeCountMap.containsKey(i)) {
+                sizeCountMap.put(i, sizeCountMap.get(i) + 1);
+            } else {
+                sizeCountMap.put(i, 1);
+            }
+        }
     }
 
     /**
@@ -44,6 +56,7 @@ public class Grid {
      */
     public void topple(Site site) {
         incrementAvalancheCount();
+
         site.setState(site.currentState - 4);
 
         for (Point neighbouringPoint : Utility.getValidNeighbourPoints(site, n-1)) {
@@ -60,6 +73,10 @@ public class Grid {
                 toppleAtThreshold(getSiteAtPoint(neighbouringPoint), threshold);
             }
         }
+    }
+
+    public Map<Integer, Integer> getSizeCountMap() {
+        return sizeCountMap;
     }
 
     public Site getSiteAtPoint(Point point) {
