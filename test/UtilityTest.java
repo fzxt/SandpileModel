@@ -1,5 +1,3 @@
-package tests;
-
 import com.fahad.SandPileModel.Point;
 import com.fahad.SandPileModel.Site;
 import com.fahad.SandPileModel.Utility;

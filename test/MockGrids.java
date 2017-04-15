@@ -1,10 +1,8 @@
-package tests;
-
 import com.fahad.SandPileModel.Grid;
 import com.fahad.SandPileModel.Point;
 import com.fahad.SandPileModel.Site;
 
-class MockGrids {
+public class MockGrids {
 
     /**
      * [0, 0, 0]
