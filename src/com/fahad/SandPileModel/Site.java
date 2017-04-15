@@ -1,6 +1,7 @@
 package com.fahad.SandPileModel;
 
 public class Site {
+
     Point position;
     int currentState;
 
@@ -25,4 +26,5 @@ public class Site {
     public void setState(int state) {
         this.currentState = state;
     }
+
 }

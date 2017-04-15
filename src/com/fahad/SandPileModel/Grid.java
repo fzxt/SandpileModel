@@ -1,12 +1,15 @@
 package com.fahad.SandPileModel;
 
 public class Grid {
+
     private Site[][] sites;
     private int n;
+    private int numAvalanches;
 
     public Grid(int n) {
         assert n > 0;
         this.n = n;
+        numAvalanches = 0;
         sites = new Site[n][n];
         initializeWithEmptySites();
     }
@@ -15,12 +18,36 @@ public class Grid {
         return sites;
     }
 
+    /**
+     * Used primarily for debugging purposes
+     */
     public void printSites() {
         for (int i = 0; i < sites.length; i++) {
             for (int j = 0; j < sites[i].length; j++) {
                 System.out.print(sites[i][j].toString() + " ");
             }
             System.out.println();
+        }
+    }
+
+    public int getNumAvalanches() {
+        return numAvalanches;
+    }
+
+    private void incrementAvalancheCount() {
+        numAvalanches++;
+    }
+
+    /**
+     * This will topple according to the model presented in Abelian Sandpile Model
+     * @param site      The site one is trying to topple
+     */
+    public void topple(Site site) {
+        incrementAvalancheCount();
+        site.setState(site.currentState - 4);
+
+        for (Point neighbouringPoint : Utility.getValidNeighbourPoints(site, n-1)) {
+            getSiteAtPoint(neighbouringPoint).increment();
         }
     }
 
@@ -35,18 +62,6 @@ public class Grid {
         }
     }
 
-    /**
-     * This will topple according to the model presented in Abelian Sandpile Model
-     * @param site      The site one is trying to topple
-     */
-    public void topple(Site site) {
-        site.setState(site.currentState - 4);
-
-        for (Point neighbouringPoint : Utility.getValidNeighbourPoints(site, n-1)) {
-            getSiteAtPoint(neighbouringPoint).increment();
-        }
-    }
-
     public Site getSiteAtPoint(Point point) {
         return sites[point.x][point.y];
     }
@@ -58,4 +73,5 @@ public class Grid {
             }
         }
     }
+
 }

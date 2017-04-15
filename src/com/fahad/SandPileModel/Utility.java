@@ -26,4 +26,5 @@ public class Utility {
 
         return validPoints;
     }
+
 }

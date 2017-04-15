@@ -4,8 +4,7 @@
 - Implement the [Abelian Sandpile Model](https://www.wikiwand.com/en/Abelian_sandpile_model)
 - Confirm the following power-laws:
   -  the number of clusters D(s) of size s scaled with some exponent τ : D(s) ∼ s^(−τ)
-  - D(t) ∼ t^(-alpha)
-
+  
 ## Class design
 
 ### Grid

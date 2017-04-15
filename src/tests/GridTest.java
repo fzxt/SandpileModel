@@ -25,6 +25,7 @@ public class GridTest {
         };
 
         Site[][] resultingSites = testGrid1.getSites();
+        assertEquals(1, testGrid1.getNumAvalanches());
         assertSiteStates(expected, resultingSites);
     }
 
@@ -44,6 +45,7 @@ public class GridTest {
         };
 
         Site[][] resultingSites = testGrid2.getSites();
+        assertEquals(9, testGrid2.getNumAvalanches());
         assertSiteStates(expected, resultingSites);
     }
 
@@ -54,4 +56,5 @@ public class GridTest {
             }
         }
     }
+
 }
