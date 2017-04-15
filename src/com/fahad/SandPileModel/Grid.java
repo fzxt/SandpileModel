@@ -24,24 +24,11 @@ public class Grid {
         }
     }
 
-    /**
-     * Will initialize with random state (either 0 or 1)
-     */
-    public void initializeSitesWithRandomState() {
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < sites[i].length; j++) {
-                int initialState = Math.random() > 0.5 ? 1 : 0;
-                sites[i][j] = new Site(new Point(i, j), initialState);
-            }
-        }
-    }
-
-
     public void toppleAtThreshold(Site s, int threshold) {
         if (s.getCurrentState() >= threshold) {
             topple(s);
 
-            for (Point neighbouringPoint : Utility.getValidNeighbourPoints(s, 0, n)) {
+            for (Point neighbouringPoint : Utility.getValidNeighbourPoints(s, n-1)) {
                 // If the neighboring point is actually on the grid, we recursively check if it toppled
                 toppleAtThreshold(getSiteAtPoint(neighbouringPoint), threshold);
             }
@@ -55,7 +42,7 @@ public class Grid {
     public void topple(Site site) {
         site.setState(site.currentState - 4);
 
-        for (Point neighbouringPoint : Utility.getValidNeighbourPoints(site, 0, n)) {
+        for (Point neighbouringPoint : Utility.getValidNeighbourPoints(site, n-1)) {
             getSiteAtPoint(neighbouringPoint).increment();
         }
     }

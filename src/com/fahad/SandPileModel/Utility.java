@@ -2,9 +2,9 @@ package com.fahad.SandPileModel;
 
 import java.util.ArrayList;
 
-class Utility {
+public class Utility {
 
-    public static ArrayList<Point> getValidNeighbourPoints(Site site, int min, int max) {
+    public static ArrayList<Point> getValidNeighbourPoints(Site site, int max) {
         ArrayList<Point> validPoints = new ArrayList<>();
 
         Point[] directionPoints = {
@@ -19,7 +19,7 @@ class Utility {
         };
 
         for (Point p : directionPoints) {
-            if ((p.x >= min && p.x <= max) && (p.y >= min && p.y <= max)) {
+            if ((p.x >= 0 && p.x <= max) && (p.y >= 0 && p.y <= max)) {
                 validPoints.add(p);
             }
         }
