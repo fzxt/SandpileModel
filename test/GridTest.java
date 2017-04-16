@@ -50,13 +50,15 @@ public class GridTest {
 
     private void setUpTestGrid1() {
         Site middleSite = testGrid1.getSiteAtPoint(new Point(1, 1));
+        // Set the middle site past the threshold (3)
+        middleSite.increment();
         testGrid1.topple(middleSite);
     }
 
     private void setUpTestGrid2() {
         Site startingSite = testGrid2.getSiteAtPoint(new Point(2, 2));
         startingSite.increment();
-        testGrid2.toppleAtThreshold(startingSite, 4);
+        testGrid2.toppleAtThreshold(startingSite, 3);
     }
 
     private void assertSiteStates(int[][] expectedStates, Site[][] sites) {

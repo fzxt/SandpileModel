@@ -16,9 +16,10 @@ import java.util.Random;
 
 public class Main {
 
-    static final int N = 500;
-    static final int T = 100000;
-    static final int THRESHOLD = 4;
+
+    static final int N = 200;
+    static final int T = 80000;
+    static final int THRESHOLD = 3;
 
     public static void main(String[] args) {
         Random random = new Random(1234);
@@ -33,10 +34,11 @@ public class Main {
             Site s = grid.getSiteAtPoint(randomPoint);
             s.increment();
             grid.toppleAtThreshold(s, THRESHOLD);
+            grid.resetAvalancheCount();
         }
 
         for (Map.Entry<Integer, Integer> entry : grid.getSizeCountMap().entrySet()) {
-             System.out.printf("%d %d\n", entry.getKey(), entry.getValue());
+            System.out.printf("%f %f\n", Math.log(entry.getKey()), Math.log(entry.getValue()));
         }
     }
 

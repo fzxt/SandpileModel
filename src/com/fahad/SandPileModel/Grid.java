@@ -41,13 +41,6 @@ public class Grid {
 
     private void incrementAvalancheCount() {
         numAvalanches++;
-        for (int i = 0; i <= getNumAvalanches(); i++) {
-            if (sizeCountMap.containsKey(i)) {
-                sizeCountMap.put(i, sizeCountMap.get(i) + 1);
-            } else {
-                sizeCountMap.put(i, 1);
-            }
-        }
     }
 
     /**
@@ -65,14 +58,20 @@ public class Grid {
     }
 
     public void toppleAtThreshold(Site s, int threshold) {
-        if (s.getCurrentState() >= threshold) {
+        if (s.getCurrentState() > threshold) {
             topple(s);
-
+            incrementCountMap(getNumAvalanches());
             for (Point neighbouringPoint : Utility.getValidNeighbourPoints(s, n-1)) {
                 // If the neighboring point is actually on the grid, we recursively check if it toppled
                 toppleAtThreshold(getSiteAtPoint(neighbouringPoint), threshold);
             }
         }
+
+        incrementCountMap(0);
+    }
+
+    public void resetAvalancheCount() {
+        this.numAvalanches = 0;
     }
 
     public Map<Integer, Integer> getSizeCountMap() {
@@ -81,6 +80,14 @@ public class Grid {
 
     public Site getSiteAtPoint(Point point) {
         return sites[point.x][point.y];
+    }
+
+    private void incrementCountMap(int avalancheSize) {
+        if (sizeCountMap.containsKey(avalancheSize)) {
+            sizeCountMap.put(avalancheSize, sizeCountMap.get(avalancheSize) + 1);
+        } else {
+            sizeCountMap.put(avalancheSize, 1);
+        }
     }
 
     private void initializeWithEmptySites() {

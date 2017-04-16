@@ -14,9 +14,9 @@ public class MockGrids {
         Grid grid = new Grid(3);
         Point midPoint = new Point(1, 1);
 
-        // Set the middle site to 4
+        // Set the middle site to 3
         Site middleSite = grid.getSiteAtPoint(midPoint);
-        middleSite.setState(4);
+        middleSite.setState(3);
 
         return grid;
     }
