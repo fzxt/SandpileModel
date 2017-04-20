@@ -1,8 +1,8 @@
-import com.fahad.SandPileModel.Point;
 import com.fahad.SandPileModel.Site;
 import com.fahad.SandPileModel.Utility;
 import org.junit.jupiter.api.Test;
 
+import java.awt.Point;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
