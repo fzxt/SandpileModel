@@ -1,16 +1,17 @@
 import com.fahad.SandPileModel.Grid;
-import com.fahad.SandPileModel.Point;
 import com.fahad.SandPileModel.Site;
+
+import java.awt.Point;
 
 public class MockGrids {
 
     /**
      * [0, 0, 0]
-     * [0, 4, 0]
+     * [0, 3, 0]
      * [0, 0, 0]
      */
     static Grid getTestGrid1() {
-        // 3x3 Grid
+        // 3x3 Grid, all values are 0 by default
         Grid grid = new Grid(3);
         Point midPoint = new Point(1, 1);
 
@@ -53,5 +54,24 @@ public class MockGrids {
 
         return grid;
     }
+
+    static Grid getTestGrid3() {
+        Grid grid = new Grid(3);
+
+        int[][] values = {
+                {1, 3, 3},
+                {3, 2, 1},
+                {2, 3, 2}
+        };
+
+        for (int i = 0; i < values.length; i++) {
+            for (int j = 0; j < values[i].length; j++) {
+                grid.getSiteAtPoint(new Point(i, j)).setState(values[i][j]);
+            }
+        }
+
+        return grid;
+    }
+
 
 }

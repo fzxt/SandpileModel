@@ -1,9 +1,17 @@
 package com.fahad.SandPileModel;
 
+import java.awt.Point;
 import java.util.ArrayList;
 
 public class Utility {
 
+    /**
+     * Utility method to get valid neighbour points.
+     * A valid neighbour is one whose position is in the bounds of 0 < neighbour.x && neighbour.y < max
+     * @param site      Site whose neighbours you are checking
+     * @param max       Max bounds
+     * @return          List of points of Valid neighbours
+     */
     public static ArrayList<Point> getValidNeighbourPoints(Site site, int max) {
         ArrayList<Point> validPoints = new ArrayList<>();
 
