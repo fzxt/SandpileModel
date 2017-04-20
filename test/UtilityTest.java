@@ -1,5 +1,3 @@
-import com.fahad.SandPileModel.Site;
-import com.fahad.SandPileModel.Utility;
 import org.junit.jupiter.api.Test;
 
 import java.awt.Point;

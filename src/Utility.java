@@ -1,5 +1,3 @@
-package com.fahad.SandPileModel;
-
 import java.awt.Point;
 import java.util.ArrayList;
 

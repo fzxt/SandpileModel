@@ -1,6 +1,3 @@
-import com.fahad.SandPileModel.Grid;
-import com.fahad.SandPileModel.Site;
-
 import java.awt.Point;
 
 public class MockGrids {
